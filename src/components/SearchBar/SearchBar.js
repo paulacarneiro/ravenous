@@ -1,8 +1,6 @@
 import React from "react";
 import './SearchBar.css';
 
-
-
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
@@ -19,8 +17,7 @@ class SearchBar extends React.Component {
     this.sortByOptions = {
       'Best Match': 'best_match',
       'Highest Rated': 'rating',
-      'Most Reviewed': 'review_count',
-      //'Distance': 'distance'
+      'Most Reviewed': 'review_count'
     };
   }
 
@@ -32,7 +29,10 @@ class SearchBar extends React.Component {
   }
 
   handleSortByChange(sortByOptionValue) {
-    this.setState({sortBy: sortByOptionValue});
+    this.setState({sortBy: sortByOptionValue}, () => {
+      this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy);
+    });
+    
   }
 
   handleTermChange(event) {
